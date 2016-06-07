@@ -21,7 +21,7 @@ exports.updateTag = function () {
         return true;
 
     } else {
-        var limit_range = (start - 1) * 10 + ',' + 20;
+        var limit_range = (start - 1) * 10 + ',' + 10;
         var userAddSql = 'SELECT * FROM panda limit ' + limit_range + ';';
         conn.query(userAddSql, function (err, rows, fields) {
             if (err) {

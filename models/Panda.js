@@ -42,7 +42,7 @@ myEvents.on('start', function () {
 });
 myEvents.on('updateOther',function () {
     rule1.second = times1;
-    for (var i = 0; i < 60; i = i + 10) {
+    for (var i = 0; i < 60; i = i + 2) {
         times1.push(i);
     }
     schedule1.scheduleJob(rule1, function () {
@@ -70,6 +70,8 @@ function sub() {
         return;
     }
     myEvents.emit('start');
+    //myEvents.emit('updateOther');
+
 }
 myEvents.on('gameover',function () {
     uploadSerivce.uploadSerivce('panda')
