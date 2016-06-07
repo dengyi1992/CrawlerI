@@ -8,6 +8,7 @@ var myEvents = new EventEmitter();
 var schedule = require('node-schedule');
 var schedule1 = require('node-schedule');
 var HuYacrawler = require("../crawler/HuYacrawlerTask.js");
+var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
 
@@ -50,6 +51,7 @@ myEvents.on('updateOther',function () {
             this.cancel();
             console.log('-----------------更新完了-------------------');
             isRuning = false;
+            myEvents.emit('gameover')
         }
     });
 });
@@ -70,3 +72,6 @@ function sub() {
     }
     myEvents.emit('start');
 }
+myEvents.on('gameover',function () {
+    uploadSerivce.uploadSerivce('huya')
+});

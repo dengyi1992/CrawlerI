@@ -8,6 +8,7 @@ var myEvents = new EventEmitter();
 var schedule = require('node-schedule');
 var schedule1 = require('node-schedule');
 var timeTask = require("../crawler/YYcrawlerTask.js");
+var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
 var times = [];
@@ -61,6 +62,7 @@ myEvents.on('updateFans',function () {
             console.log('------------粉丝更新结束---------------')
             this.cancel();
             isRuning=false;
+            myEvents.emit('gameover');
         }
 
     }); 
@@ -82,3 +84,6 @@ function sub() {
     }
     myEvents.emit('start');
 }
+myEvents.on('gameover',function () {
+    uploadSerivce.uploadSerivce('yy')
+});

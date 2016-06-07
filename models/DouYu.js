@@ -8,6 +8,7 @@ var myEvents = new EventEmitter();
 var schedule = require('node-schedule');
 var schedule1 = require('node-schedule');
 var DouYucrawler = require("../crawler/DouYucrawlerTask.js");
+var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
 
@@ -49,9 +50,14 @@ myEvents.on('updateOther',function () {
         if (DouYucrawler.UpTags) {
             this.cancel();
             console.log('-----------------更新完了-------------------');
+            myEvents.emit('gameover');
             isRuning = false;
         }
     });
+});
+
+myEvents.on('gameover',function () {
+    uploadSerivce.uploadSerivce('douyu')
 });
 
 
