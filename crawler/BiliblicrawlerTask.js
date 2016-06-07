@@ -71,7 +71,7 @@ function acquireData(data) {
 exports.updateTagsAndfans = function () {
     var limit_range = (tag - 1) * 10 + ',' + 10;
 
-    var userAddSql = 'SELECT * FROM blibli limit ' + limit_range + ';';
+    var userAddSql = 'SELECT * FROM bilibli limit ' + limit_range + ';';
     conn.query(userAddSql, function (err, rows, fields) {
         if (err) {
             console.log(err);
