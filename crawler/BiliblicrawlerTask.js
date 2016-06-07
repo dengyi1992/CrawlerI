@@ -44,7 +44,7 @@ exports.getMainData = function () {
 
 };
 function acquireData(data) {
-    var sql = 'replace INTO blibli (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags) VALUES (?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO bilibli (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags) VALUES (?,?,?,?,?,?,?,?)';
     try {
         if (data.data.length == 0) {
             isFinish = true;

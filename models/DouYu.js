@@ -37,24 +37,24 @@ myEvents.on('start', function () {
         if (DouYucrawler.getMainData()) {
             this.cancel();
             console.log('-----------------爬完了-------------------');
-            myEvents.emit('updateOther');
-        }
-    });
-});
-myEvents.on('updateOther',function () {
-    rule1.second = times1;
-    for (var i = 0; i < 60; i = i + 10) {
-        times1.push(i);
-    }
-    schedule1.scheduleJob(rule1, function () {
-        if (DouYucrawler.UpTags) {
-            this.cancel();
-            console.log('-----------------更新完了-------------------');
             myEvents.emit('gameover');
-            isRuning = false;
         }
     });
 });
+// myEvents.on('updateOther',function () {
+//     rule1.second = times1;
+//     for (var i = 0; i < 60; i = i + 10) {
+//         times1.push(i);
+//     }
+//     schedule1.scheduleJob(rule1, function () {
+//         if (DouYucrawler.UpTags()) {
+//             this.cancel();
+//             console.log('-----------------更新完了-------------------');
+//             myEvents.emit('gameover');
+//             isRuning = false;
+//         }
+//     });
+// });
 
 myEvents.on('gameover',function () {
     uploadSerivce.uploadSerivce('douyu')

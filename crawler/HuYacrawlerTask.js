@@ -17,6 +17,8 @@ var page = 0;
  */
 exports.UpdateTags = function () {
     if (isFinish) {
+        isFinish=false;
+        start=1;
         return true;
     } else {
         var limit_range = (start - 1) * 10 + ',' + 10;
@@ -94,7 +96,7 @@ myEvents.on('initData', function (pn) {
 
 });
 function acquireData(data) {
-    var sql = 'insert INTO huya (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags) VALUES (?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO huya (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags) VALUES (?,?,?,?,?,?,?,?)';
     if (data.data.list.length == 0) {
         return console.log('没有数据了');
     }

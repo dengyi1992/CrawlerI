@@ -71,6 +71,8 @@ function sub() {
         return;
     }
     myEvents.emit('start');
+    // // myEvents.emit('gameover')
+    // myEvents.emit('updateOther');
 }
 myEvents.on('gameover',function () {
     uploadSerivce.uploadSerivce('huya')

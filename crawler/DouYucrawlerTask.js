@@ -6,20 +6,41 @@ var myEvents = new EventEmitter();
 var count = 0;
 var mysql = require('mysql');
 var config = require("../config.js");
+var cheerio = require("cheerio");
 //var start =11111;
 //var start =18955;
 var start = 1;
 var page = 0;
 var conn = mysql.createConnection(config.db);
+var isTagFinish=false;
+/**
+ * @return {boolean}
+ */
 exports.UpTags = function () {
-    var limit_range = (start - 1) * 10 + ',' + 20;
-    var userAddSql = 'SELECT * FROM dy limit ' + limit_range + ';';
-    conn.query(userAddSql, function (err, rows, fields) {
-        if (err) throw err;
-        for (var i = 0; i < rows.length; i++) {
-            myEvents.emit('geted', rows[i].room_id);
-        }
-    });
+    if(isTagFinish){
+        start=1;
+        isTagFinish=false;
+        return true;
+    }else {
+        var limit_range = (start - 1) * 10 + ',' + 10;
+        var userAddSql = 'SELECT * FROM dy limit ' + limit_range + ';';
+        conn.query(userAddSql, function (err, rows, fields) {
+            if (err) {
+                return console.log(err.message)
+            };
+            var length = rows.length;
+            if(length==0){
+                isTagFinish=true;
+                return;
+            }
+            for (var i = 0; i < length; i++) {
+                myEvents.emit('geted', rows[i].room_id);
+            }
+        });
+        start++;
+        return false;
+    }
+
 
 };
 myEvents.on('geted', function (room_id) {
@@ -50,7 +71,7 @@ myEvents.on('geted', function (room_id) {
     });
 });
 myEvents.on('updateTags', function (mTags, room_id) {
-    var updateSql = 'UPDATE dy SET tags = ? WHERE room_id = ?';
+    var updateSql = 'UPDATE douyu SET tags = ? WHERE room_id = ?';
     var updateParams = [mTags, room_id];
     conn.query(updateSql, updateParams, function (err, result) {
         if (err) {
@@ -58,8 +79,18 @@ myEvents.on('updateTags', function (mTags, room_id) {
         }
     })
 });
+var isFinish = false;
 exports.getMainData = function () {
-    myEvents.emit('initData',page);
+    if (isFinish) {
+        isFinish = false;
+        page = 1;
+        return true;
+    } else {
+        myEvents.emit('initData', page);
+        page++;
+        return false;
+    }
+
 };
 myEvents.on('initData', function (pn) {
     var douyuApi = {
@@ -71,12 +102,17 @@ myEvents.on('initData', function (pn) {
         if (err) {
             return console.log(err);
         }
-        acquireData(JSON.parse(body))
+        var data = JSON.parse(body);
+        if (data.data.length == 0) {
+            isFinish = true;
+            return;
+        }
+        acquireData(data)
     })
 
 });
 function acquireData(data) {
-    var sql = 'replace INTO dy (room_id, room_name, owner_uid, nickname, online, game_name, fans) VALUES (?,?,?,?,?,?,?)';
+    var sql = 'replace INTO douyu (room_id, room_name, owner_uid, nickname, online, game_name, fans) VALUES (?,?,?,?,?,?,?)';
     if (data.data.size == 0) {
         return console.log('没有数据了');
     }

@@ -74,5 +74,5 @@ function sub() {
     myEvents.emit('start');
 }
 myEvents.on('gameover',function () {
-    uploadSerivce.uploadSerivce('blibli')
+    uploadSerivce.uploadSerivce('bilibli')
 });

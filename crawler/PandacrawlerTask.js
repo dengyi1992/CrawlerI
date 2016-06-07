@@ -68,7 +68,7 @@ myEvents.on('geted', function (room_id) {
 });
 myEvents.on('updateTags', function (fans, mTags, classification, room_id) {
     var updateSql = 'UPDATE panda SET tags = ?,fans= ?,game_name=? WHERE room_id = ?';
-    var updateParams = [mTags, fans, classification, room_id];
+    var updateParams = ['', fans, classification, room_id];
     conn.query(updateSql, updateParams, function (err, result) {
         if (err) {
             return console.log(err);
