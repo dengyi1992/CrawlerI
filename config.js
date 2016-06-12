@@ -13,7 +13,7 @@ var config = {
     upload: {
         path: path.join(__dirname, 'public/images/'),
         url: '/public/upload/',
-        uploadurl:'http://121.42.136.52:2999/'
+        uploadurl:'http://120.27.94.166:2999/'
     },
 
 
