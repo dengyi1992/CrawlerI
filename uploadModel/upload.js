@@ -50,7 +50,7 @@ function selectAndSend(tablename) {
         }
         var options = {
             headers: {"Connection": "close"},
-            url: 'http://121.42.136.52:2999/'+tablename,
+            url: config.upload.uploadurl+tablename,
             method: 'POST',
             json: true,
             body: {data: rows}

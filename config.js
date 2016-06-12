@@ -12,7 +12,8 @@ var config = {
 
     upload: {
         path: path.join(__dirname, 'public/images/'),
-        url: '/public/upload/'
+        url: '/public/upload/',
+        uploadurl:'http://121.42.136.52:2999/'
     },
 
 
@@ -20,7 +21,7 @@ var config = {
    db:{
        host: 'localhost',
        user: 'root',
-       password: 'dengyi',
+       password: 'root',
        database: 'douyu',
        port: 3306
    } 
