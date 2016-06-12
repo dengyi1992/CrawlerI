@@ -138,7 +138,7 @@ myEvents.on('getTag', function (room_id) {
 });
 
 myEvents.on('updateInfo', function (fanscount, type, alltags, room_id) {
-    var sql = 'UPDATE blibli SET fans = ?,game_name=?,tags=? WHERE room_id = ?';
+    var sql = 'UPDATE bilibli SET fans = ?,game_name=?,tags=? WHERE room_id = ?';
     var parms = [fanscount, type, alltags, room_id];
     conn.query(sql, parms, function (err, result) {
         if (err) {
