@@ -102,12 +102,17 @@ myEvents.on('initData', function (pn) {
         if (err) {
             return console.log(err);
         }
-        var data = JSON.parse(body);
-        if (data.data.length == 0) {
-            isFinish = true;
-            return;
+        try {
+            var data = JSON.parse(body);
+            if (data.data.length == 0) {
+                isFinish = true;
+                return;
+            }
+            acquireData(data)
+        }catch (e){
+            console.log(e)
         }
-        acquireData(data)
+
     })
 
 });
