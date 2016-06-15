@@ -36,7 +36,7 @@ myEvents.on('start', function () {
     schedule.scheduleJob(rule, function () {
         if (DouYucrawler.getMainData()) {
             this.cancel();
-            console.log('-----------------爬完了-------------------');
+            console.log('-------DouYu----------爬完了-------------------');
             myEvents.emit('gameover');
         }
     });

@@ -35,7 +35,7 @@ myEvents.on('start', function () {
     schedule.scheduleJob(rule, function () {
         if (panda.getMainData()) {
             this.cancel();
-            console.log('-----------------爬完了-------------------');
+            console.log('----------Panda-------爬完了-------------------');
             myEvents.emit('updateOther');
         }
     });
@@ -48,7 +48,7 @@ myEvents.on('updateOther',function () {
     schedule1.scheduleJob(rule1, function () {
         if (panda.updateTag()) {
             this.cancel();
-            console.log('-----------------更新完了-------------------');
+            console.log('-----------Panda------更新完了-------------------');
             isRuning = false;
             myEvents.emit('gameover')
         }

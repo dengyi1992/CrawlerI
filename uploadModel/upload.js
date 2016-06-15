@@ -43,7 +43,7 @@ function selectAndSend(tablename) {
         if (err) {
             return console.log(err)
         }
-        console.log(rows);
+        console.log(tablename+"上传json");
         if (rows.length == 0) {
             isFinish = true;
             return;

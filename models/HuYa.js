@@ -36,7 +36,7 @@ myEvents.on('start', function () {
     schedule.scheduleJob(rule, function () {
         if (HuYacrawler.getMainData()) {
             this.cancel();
-            console.log('-----------------爬完了-------------------');
+            console.log('----------HuYa-------爬完了-------------------');
             myEvents.emit('updateOther');
         }
     });
@@ -49,7 +49,7 @@ myEvents.on('updateOther',function () {
     schedule1.scheduleJob(rule1, function () {
         if (HuYacrawler.UpdateTags()) {
             this.cancel();
-            console.log('-----------------更新完了-------------------');
+            console.log('----------HuYa-------更新完了-------------------');
             isRuning = false;
             myEvents.emit('gameover')
         }

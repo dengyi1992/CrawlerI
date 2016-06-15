@@ -42,7 +42,7 @@ myEvents.on('start', function () {
                     if (timeTask.getSHOW()) {
                         if (timeTask.getDANCE()) {
                             this.cancel();
-                            console.log('-------------------------------爬虫结束-------------------------------------');
+                            console.log('---------------------YY----------爬虫结束-------------------------------------');
                             myEvents.emit('updateFans');
                         }
                     }
@@ -59,7 +59,7 @@ myEvents.on('updateFans',function () {
 
     schedule.scheduleJob(rule, function () {
         if(timeTask.getFans()){
-            console.log('------------粉丝更新结束---------------')
+            console.log('----------YY--粉丝更新结束---------------')
             this.cancel();
             isRuning=false;
             myEvents.emit('gameover');
