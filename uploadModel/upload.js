@@ -46,6 +46,7 @@ function selectAndSend(tablename) {
         console.log(tablename+"上传json");
         if (rows.length == 0) {
             isFinish = true;
+            myEvents.emit("clearTable",tablename);
             return;
         }
         var options = {
@@ -67,6 +68,18 @@ function selectAndSend(tablename) {
     });
     page++;
 };
+/**
+ * 表清除
+ */
+myEvents.on("clearTable",function (tablename) {
+    var selectSql = 'TRUNCATE TABLE '+tablename;
+    conn.query(selectSql, function (err, rows, fields) {
+        if (err) {
+            return console.log(err)
+        }
+       
+    });
+});
 var mypretime = 0;
 function sub(tablename) {
     var Today = new Date();
