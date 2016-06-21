@@ -11,6 +11,7 @@ var panda = require("../crawler/PandacrawlerTask.js");
 var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
+var TimeUtils = require("../Utils/TimeUtils");
 
 var times = [];
 var times1 = [];
@@ -18,7 +19,7 @@ var isRuning = false;
 /**
  * @return {boolean}
  */
-exports.Panda=function () {
+exports.Panda = function () {
     if (isRuning) {
         return false;
     } else {
@@ -36,11 +37,13 @@ myEvents.on('start', function () {
         if (panda.getMainData()) {
             this.cancel();
             console.log('----------Panda-------爬完了-------------------');
+            TimeUtils.PrintCrruentTime();
+
             myEvents.emit('updateOther');
         }
     });
 });
-myEvents.on('updateOther',function () {
+myEvents.on('updateOther', function () {
     rule1.second = times1;
     for (var i = 0; i < 60; i = i + 2) {
         times1.push(i);
@@ -73,6 +76,6 @@ function sub() {
     //myEvents.emit('updateOther');
 
 }
-myEvents.on('gameover',function () {
+myEvents.on('gameover', function () {
     uploadSerivce.uploadSerivce('panda')
 });

@@ -11,6 +11,7 @@ var DouYucrawler = require("../crawler/DouYucrawlerTask.js");
 var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
+var TimeUtils = require("../Utils/TimeUtils");
 
 var times = [];
 var times1 = [];
@@ -18,7 +19,7 @@ var isRuning = false;
 /**
  * @return {boolean}
  */
-exports.DouYu=function () {
+exports.DouYu = function () {
     if (isRuning) {
         return false;
     } else {
@@ -37,6 +38,8 @@ myEvents.on('start', function () {
         if (DouYucrawler.getMainData()) {
             this.cancel();
             console.log('-------DouYu----------爬完了-------------------');
+            TimeUtils.PrintCrruentTime();
+
             myEvents.emit('gameover');
         }
     });
@@ -56,7 +59,7 @@ myEvents.on('start', function () {
 //     });
 // });
 
-myEvents.on('gameover',function () {
+myEvents.on('gameover', function () {
     uploadSerivce.uploadSerivce('douyu')
 });
 

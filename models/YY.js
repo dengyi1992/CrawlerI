@@ -11,13 +11,15 @@ var timeTask = require("../crawler/YYcrawlerTask.js");
 var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
+var TimeUtils = require("../Utils/TimeUtils");
+
 var times = [];
 var times1 = [];
 var isRuning = false;
 /**
  * @return {boolean}
  */
-exports.YY=function () {
+exports.YY = function () {
     if (isRuning) {
         return false;
     } else {
@@ -43,6 +45,8 @@ myEvents.on('start', function () {
                         if (timeTask.getDANCE()) {
                             this.cancel();
                             console.log('---------------------YY----------爬虫结束-------------------------------------');
+                            TimeUtils.PrintCrruentTime();
+
                             myEvents.emit('updateFans');
                         }
                     }
@@ -51,21 +55,23 @@ myEvents.on('start', function () {
         }
     });
 });
-myEvents.on('updateFans',function () {
+myEvents.on('updateFans', function () {
     rule.second = times;
     for (var i = 0; i < 60; i = i + 2) {
         times.push(i);
     }
 
     schedule.scheduleJob(rule, function () {
-        if(timeTask.getFans()){
-            console.log('----------YY--粉丝更新结束---------------')
+        if (timeTask.getFans()) {
+            console.log('----------YY--粉丝更新结束---------------');
+            TimeUtils.PrintCrruentTime();
+
             this.cancel();
-            isRuning=false;
+            isRuning = false;
             myEvents.emit('gameover');
         }
 
-    }); 
+    });
 });
 
 
@@ -84,6 +90,6 @@ function sub() {
     }
     myEvents.emit('start');
 }
-myEvents.on('gameover',function () {
+myEvents.on('gameover', function () {
     uploadSerivce.uploadSerivce('yy')
 });

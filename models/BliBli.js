@@ -11,6 +11,7 @@ var Biliblicrawler = require("../crawler/BiliblicrawlerTask.js");
 var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var rule1 = new schedule1.RecurrenceRule();
+var TimeUtils = require("../Utils/TimeUtils");
 
 var times = [];
 var times1 = [];
@@ -18,7 +19,7 @@ var isRuning = false;
 /**
  * @return {boolean}
  */
-exports.Bilibli=function () {
+exports.Bilibli = function () {
     if (isRuning) {
         return false;
     } else {
@@ -37,12 +38,13 @@ myEvents.on('start', function () {
         if (Biliblicrawler.getMainData()) {
             this.cancel();
             console.log('----------Bilibli-------爬完了-------------------');
+            TimeUtils.PrintCrruentTime();
             myEvents.emit('updateOther');
 
         }
     });
 });
-myEvents.on('updateOther',function () {
+myEvents.on('updateOther', function () {
     rule1.second = times1;
     for (var i = 0; i < 60; i = i + 3) {
         times1.push(i);
@@ -51,6 +53,8 @@ myEvents.on('updateOther',function () {
         if (Biliblicrawler.updateTagsAndfans()) {
             this.cancel();
             console.log('-----------Bilibli------更新完了-------------------');
+            TimeUtils.PrintCrruentTime();
+
             isRuning = false;
             myEvents.emit('gameover')
         }
@@ -73,6 +77,6 @@ function sub() {
     }
     myEvents.emit('start');
 }
-myEvents.on('gameover',function () {
+myEvents.on('gameover', function () {
     uploadSerivce.uploadSerivce('bilibli')
 });

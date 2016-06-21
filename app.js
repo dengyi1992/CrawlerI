@@ -64,7 +64,7 @@ rule.minute = times;
 for (var i = 0; i < 60; i = i + 20) {
     times.push(i);
 }
-var count = 2;
+var count = 0;
 var options = {
     method: 'GET',
     encoding: null,
