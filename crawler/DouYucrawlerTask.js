@@ -12,25 +12,26 @@ var cheerio = require("cheerio");
 var start = 1;
 var page = 0;
 var conn = mysql.createConnection(config.db);
-var isTagFinish=false;
+var isTagFinish = false;
 /**
  * @return {boolean}
  */
 exports.UpTags = function () {
-    if(isTagFinish){
-        start=1;
-        isTagFinish=false;
+    if (isTagFinish) {
+        start = 1;
+        isTagFinish = false;
         return true;
-    }else {
+    } else {
         var limit_range = (start - 1) * 10 + ',' + 10;
         var userAddSql = 'SELECT * FROM dy limit ' + limit_range + ';';
         conn.query(userAddSql, function (err, rows, fields) {
             if (err) {
                 return console.log(err.message)
-            };
+            }
+            ;
             var length = rows.length;
-            if(length==0){
-                isTagFinish=true;
+            if (length == 0) {
+                isTagFinish = true;
                 return;
             }
             for (var i = 0; i < length; i++) {
@@ -109,7 +110,7 @@ myEvents.on('initData', function (pn) {
                 return;
             }
             acquireData(data)
-        }catch (e){
+        } catch (e) {
             console.log(e)
         }
 
@@ -121,16 +122,19 @@ function acquireData(data) {
     if (data.data.size == 0) {
         return console.log('没有数据了');
     }
+    var values = [];
     data.data.forEach(function (item) {
-        var params = [item.room_id, item.room_name, item.owner_uid, item.nickname, item.online, item.game_name, item.fans,item.avatar];
-        conn.query(sql, params, function (err, result) {
-            if (err) {
-                console.log(err);
-                return;
-            }
+        var params = [item.room_id, item.room_name, item.owner_uid, item.nickname, item.online, item.game_name, item.fans, item.avatar];
+        values.push(params);
 
 
-        });
+    });
+    conn.query(sql, [values], function (err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
 
     });
 }

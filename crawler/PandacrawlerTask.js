@@ -114,15 +114,16 @@ function acquireData(data) {
     if (data.data.size == 0) {
         return console.log('没有数据了');
     }
+    var values=[];
     data.data.items.forEach(function (item) {
         var params = [item.id, item.name, item.hostid, item.userinfo.nickName, item.person_num, item.classification, 0,item.userinfo.avatar];
-        conn.query(sql, params, function (err, result) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-
-        });
+        values.push(params);
+    });
+    conn.query(sql, params, function (err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
 
     });
 }

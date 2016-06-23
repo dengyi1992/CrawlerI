@@ -181,16 +181,17 @@ function acquireData(data) {
         if (data.data.data.size == 0) {
             return console.log('没有数据了');
         }
+        var values = [];
         data.data.data.forEach(function (item) {
 
-            var params = [item.sid, item.desc, item.uid, item.name, item.users, item.biz, 0, item.tag,item.avatar];
-            conn.query(sql, params, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-
-            });
+            var params = [item.sid, item.desc, item.uid, item.name, item.users, item.biz, 0, item.tag, item.avatar];
+            values.push(params);
+        });
+        conn.query(sql, params, function (err, result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
 
         });
     } catch (e) {

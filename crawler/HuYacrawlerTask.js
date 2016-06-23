@@ -17,8 +17,8 @@ var page = 0;
  */
 exports.UpdateTags = function () {
     if (isFinish) {
-        isFinish=false;
-        start=1;
+        isFinish = false;
+        start = 1;
         return true;
     } else {
         var limit_range = (start - 1) * 10 + ',' + 10;
@@ -100,12 +100,14 @@ function acquireData(data) {
     if (data.data.list.length == 0) {
         return console.log('没有数据了');
     }
+    var values = [];
     data.data.list.forEach(function (item) {
-        var params = [item.privateHost, item.roomName, 0, item.nick, item.totalCount, item.gameFullName, 0, item.recommendTagName,item.avatar180];
-        conn.query(sql, params, function (err, result) {
-            if (err) {
-                return console.log(err);
-            }
-        });
+        var params = [item.privateHost, item.roomName, 0, item.nick, item.totalCount, item.gameFullName, 0, item.recommendTagName, item.avatar180];
+        values.push(params);
+    });
+    conn.query(sql, values, function (err, result) {
+        if (err) {
+            return console.log(err);
+        }
     });
 }
