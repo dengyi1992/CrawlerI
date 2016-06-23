@@ -110,7 +110,7 @@ myEvents.on('initData', function (pn) {
 
 });
 function acquireData(data) {
-    var sql = 'replace INTO panda (room_id, room_name, owner_uid, nickname, online, game_name, fans,face) VALUES (?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO panda (room_id, room_name, owner_uid, nickname, online, game_name, fans,face) VALUES ?';
     if (data.data.size == 0) {
         return console.log('没有数据了');
     }
@@ -119,7 +119,7 @@ function acquireData(data) {
         var params = [item.id, item.name, item.hostid, item.userinfo.nickName, item.person_num, item.classification, 0,item.userinfo.avatar];
         values.push(params);
     });
-    conn.query(sql, params, function (err, result) {
+    conn.query(sql, [values], function (err, result) {
         if (err) {
             console.log(err);
             return;

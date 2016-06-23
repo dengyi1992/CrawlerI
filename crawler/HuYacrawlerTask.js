@@ -96,7 +96,7 @@ myEvents.on('initData', function (pn) {
 
 });
 function acquireData(data) {
-    var sql = 'replace INTO huya (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags,face) VALUES (?,?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO huya (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags,face) VALUES ?';
     if (data.data.list.length == 0) {
         return console.log('没有数据了');
     }
@@ -105,7 +105,7 @@ function acquireData(data) {
         var params = [item.privateHost, item.roomName, 0, item.nick, item.totalCount, item.gameFullName, 0, item.recommendTagName, item.avatar180];
         values.push(params);
     });
-    conn.query(sql, values, function (err, result) {
+    conn.query(sql, [values], function (err, result) {
         if (err) {
             return console.log(err);
         }

@@ -118,7 +118,7 @@ myEvents.on('initData', function (pn) {
 
 });
 function acquireData(data) {
-    var sql = 'replace INTO douyu (room_id, room_name, owner_uid, nickname, online, game_name, fans,face) VALUES (?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO douyu (room_id, room_name, owner_uid, nickname, online, game_name, fans,face) VALUES ?';
     if (data.data.size == 0) {
         return console.log('没有数据了');
     }

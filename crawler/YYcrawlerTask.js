@@ -176,7 +176,7 @@ exports.getDANCE = function () {
     }
 };
 function acquireData(data) {
-    var sql = 'replace INTO yy (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags,face) VALUES (?,?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO yy (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags,face) VALUES ?';
     try {
         if (data.data.data.size == 0) {
             return console.log('没有数据了');
@@ -187,7 +187,7 @@ function acquireData(data) {
             var params = [item.sid, item.desc, item.uid, item.name, item.users, item.biz, 0, item.tag, item.avatar];
             values.push(params);
         });
-        conn.query(sql, params, function (err, result) {
+        conn.query(sql, [values], function (err, result) {
             if (err) {
                 console.log(err);
                 return;
