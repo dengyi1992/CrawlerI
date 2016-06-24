@@ -21,11 +21,17 @@ var config = {
    db:{
        host: 'localhost',
        user: 'root',
-       password: 'xidian@513',
+       password: 'root',
        database: 'douyu',
        port: 3306
-   } 
-
+   }
+    // db:{
+    //     host: 'localhost',
+    //     user: 'root',
+    //     password: 'xidian@513',
+    //     database: 'douyu',
+    //     port: 3306
+    // }
 };
 
 
