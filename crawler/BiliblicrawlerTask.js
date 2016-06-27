@@ -30,7 +30,7 @@ exports.getMainData = function () {
         }
 
 
-        console.log(page + '页码');
+        // console.log(page + '页码');
         page = page + 1;
     });
     if (isFinish) {
@@ -97,7 +97,7 @@ exports.updateTagsAndfans = function () {
 
 };
 myEvents.on('getTag', function (room_id) {
-    console.log(room_id);
+    // console.log(room_id);
     var options = {
         method: 'GET',
         encoding: null,
