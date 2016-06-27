@@ -20,6 +20,8 @@ var isRuning = false;
  * @return {boolean}
  */
 exports.Panda = function () {
+    TimeUtils.PrintCrruentTime();
+
     if (isRuning) {
         return false;
     } else {
@@ -53,7 +55,9 @@ myEvents.on('updateOther', function () {
             this.cancel();
             console.log('-----------Panda------更新完了-------------------');
             isRuning = false;
-            myEvents.emit('gameover')
+            myEvents.emit('gameover');
+            TimeUtils.PrintCrruentTime();
+
         }
     });
 });

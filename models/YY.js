@@ -20,6 +20,7 @@ var isRuning = false;
  * @return {boolean}
  */
 exports.YY = function () {
+    TimeUtils.PrintCrruentTime();
     if (isRuning) {
         return false;
     } else {
@@ -37,7 +38,7 @@ myEvents.on('start', function () {
 
     schedule.scheduleJob(rule, function () {
 
-        console.log("------------" + new Date());
+        // console.log("------------" + new Date());
         if (timeTask.getYULE()) {
             if (timeTask.getMC()) {
                 if (timeTask.getLIVE()) {

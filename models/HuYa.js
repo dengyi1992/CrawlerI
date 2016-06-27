@@ -20,6 +20,8 @@ var isRuning = false;
  * @return {boolean}
  */
 exports.HuYa = function () {
+    TimeUtils.PrintCrruentTime();
+
     if (isRuning) {
         return false;
     } else {

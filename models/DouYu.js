@@ -20,6 +20,7 @@ var isRuning = false;
  * @return {boolean}
  */
 exports.DouYu = function () {
+    TimeUtils.PrintCrruentTime();
     if (isRuning) {
         return false;
     } else {
