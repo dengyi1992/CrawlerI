@@ -61,7 +61,7 @@ app.use(function (err, req, res, next) {
 });
 
 rule.minute = times;
-for (var i = 0; i < 60; i = i + 20) {
+for (var i = 0; i < 60; i = i + 30) {
     times.push(i);
 }
 var count = 0;

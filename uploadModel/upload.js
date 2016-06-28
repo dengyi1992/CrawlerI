@@ -14,6 +14,15 @@ var conn = mysql.createConnection(config.db);
 var page = 0;
 
 exports.uploadSerivce = function (tablename) {
+    var sql = 'SELECT * FROM ' + tablename;
+    conn.query(sql, function (err, rows, fields) {
+        if (err) {
+            return console.log(err)
+        }
+         console.log(rows.length+"行数"+tablename)
+
+    });
+
     if (page == 0) {
         sub(tablename);
     }
@@ -43,15 +52,15 @@ function selectAndSend(tablename) {
         if (err) {
             return console.log(err)
         }
-        console.log(tablename+"上传json");
+        console.log(tablename + "上传json");
         if (rows.length == 0) {
             isFinish = true;
-            myEvents.emit("clearTable",tablename);
+            myEvents.emit("clearTable", tablename);
             return;
         }
         var options = {
             headers: {"Connection": "close"},
-            url: config.upload.uploadurl+tablename,
+            url: config.upload.uploadurl + tablename,
             method: 'POST',
             json: true,
             body: {data: rows}
@@ -71,13 +80,13 @@ function selectAndSend(tablename) {
 /**
  * 表清除
  */
-myEvents.on("clearTable",function (tablename) {
-    var selectSql = 'TRUNCATE TABLE '+tablename;
+myEvents.on("clearTable", function (tablename) {
+    var selectSql = 'TRUNCATE TABLE ' + tablename;
     conn.query(selectSql, function (err, rows, fields) {
         if (err) {
             return console.log(err)
         }
-       
+
     });
 });
 var mypretime = 0;
