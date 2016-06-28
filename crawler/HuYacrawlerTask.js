@@ -71,6 +71,7 @@ exports.getMainData = function () {
     page++;
     if (isMainFinish) {
         isMainFinish = false;
+        page=0;
         return true;
     } else {
         return false;
