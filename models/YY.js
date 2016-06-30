@@ -43,12 +43,14 @@ myEvents.on('start', function () {
             if (timeTask.getMC()) {
                 if (timeTask.getLIVE()) {
                     if (timeTask.getSHOW()) {
-                        if (timeTask.getDANCE()) {
-                            this.cancel();
-                            console.log('---------------------YY----------爬虫结束-------------------------------------');
-                            TimeUtils.PrintCrruentTime();
+                        if (timeTask.getGAME()) {
+                            if (timeTask.getDANCE()) {
+                                this.cancel();
+                                console.log('---------------------YY----------爬虫结束-------------------------------------');
+                                TimeUtils.PrintCrruentTime();
 
-                            myEvents.emit('updateFans');
+                                myEvents.emit('updateFans');
+                            }
                         }
                     }
                 }

@@ -13,7 +13,7 @@ var mcpage = 1;
 var livepage = 1;
 var showpage = 1;
 var dancepage = 1;
-
+var gamepage=1;
 var yule = true;
 exports.getYULE = function () {
 
@@ -87,7 +87,7 @@ exports.getLIVE = function () {
     var options1 = {
         method: 'GET',
         encoding: null,
-        url: "http://www.yy.com/specialMore/page?biz=mc&moduleId=29&page=" + livepage
+        url: "http://www.yy.com/more/page.action?biz=sing&subBiz=idx&moduleId=95&page=" + livepage
     };
 
     request(options1, function (error, response, body) {
@@ -140,6 +140,37 @@ exports.getSHOW = function () {
     return false;
 
 };
+exports.getGAME = function () {
+    if (gamepage < 0) {
+
+        return true;
+    }
+    var options1 = {
+        method: 'GET',
+        encoding: null,
+        url: "http://www.yy.com/specialMore/page?biz=talk&subBiz=&moduleId=21&page=" + gamepage
+    };
+
+    request(options1, function (error, response, body) {
+        gamepage = gamepage + 1;
+        if (error) {
+            return console.log(error);
+        }
+        try {
+            var parse = JSON.parse(body);
+            if (parse.data.data.length == 0) {
+                gamepage = -9999;
+                return console.log('no more data');
+            }
+            acquireData(parse);
+        } catch (e) {
+            console.log(e)
+        }
+    });
+
+    return false;
+
+};
 exports.getDANCE = function () {
 
     var options1 = {
@@ -170,6 +201,7 @@ exports.getDANCE = function () {
         showpage = 1;
         yulepage = 1;
         dancepage = 1;
+        gamepage =1;
         return true;
     } else {
         return false;
