@@ -44,7 +44,7 @@ exports.getMainData = function () {
 
 };
 function acquireData(data) {
-    var sql = 'replace INTO bilibli (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags) VALUES (?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO bilibli (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags,face) VALUES (?,?,?,?,?,?,?,?,?)';
     try {
         if (data.data.length == 0) {
             isFinish = true;
@@ -52,7 +52,7 @@ function acquireData(data) {
         }
         data.data.forEach(function (item) {
 
-            var params = [item.roomid, item.title, item.uid, item.uname, item.online, '', 0, ''];
+            var params = [item.roomid, item.title, item.uid, item.uname, item.online, '', 0, '',item.cover];
             conn.query(sql, params, function (err, result) {
                 if (err) {
                     console.log(err);

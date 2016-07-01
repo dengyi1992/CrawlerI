@@ -72,7 +72,7 @@ var options = {
 };
 schedule.scheduleJob(rule, function () {
 
-    switch (count % 5) {
+    switch (count % 3) {
         case 0:
             options.url = 'http://localhost:3000/huya';
             break;
@@ -82,12 +82,12 @@ schedule.scheduleJob(rule, function () {
         case 2:
             options.url = 'http://localhost:3000/bilibli';
             break;
-        case 3:
-            options.url = 'http://localhost:3000/panda';
-            break;
-        case 4:
-            options.url = 'http://localhost:3000/yy';
-            break;
+        // case 3:
+        //     options.url = 'http://localhost:3000/panda';
+        //     break;
+        // case 4:
+        //     options.url = 'http://localhost:3000/yy';
+        //     break;
         default:
             break;
     }

@@ -176,14 +176,14 @@ exports.getDANCE = function () {
     }
 };
 function acquireData(data) {
-    var sql = 'replace INTO yy (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags) VALUES (?,?,?,?,?,?,?,?)';
+    var sql = 'replace INTO yy (room_id, room_name, owner_uid, nickname, online, game_name, fans,tags,face) VALUES (?,?,?,?,?,?,?,?,?)';
     try {
         if (data.data.data.size == 0) {
             return console.log('没有数据了');
         }
         data.data.data.forEach(function (item) {
 
-            var params = [item.sid, item.desc, item.uid, item.name, item.users, item.biz, 0, item.tag];
+            var params = [item.sid, item.desc, item.uid, item.name, item.users, item.biz, 0, item.tag,item.avatar];
             conn.query(sql, params, function (err, result) {
                 if (err) {
                     console.log(err);

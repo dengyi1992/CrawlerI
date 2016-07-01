@@ -112,12 +112,12 @@ myEvents.on('initData', function (pn) {
 
 });
 function acquireData(data) {
-    var sql = 'replace INTO douyu (room_id, room_name, owner_uid, nickname, online, game_name, fans) VALUES (?,?,?,?,?,?,?)';
+    var sql = 'replace INTO douyu (room_id, room_name, owner_uid, nickname, online, game_name, fans,face) VALUES (?,?,?,?,?,?,?,?)';
     if (data.data.size == 0) {
         return console.log('没有数据了');
     }
     data.data.forEach(function (item) {
-        var params = [item.room_id, item.room_name, item.owner_uid, item.nickname, item.online, item.game_name, item.fans];
+        var params = [item.room_id, item.room_name, item.owner_uid, item.nickname, item.online, item.game_name, item.fans,item.avatar];
         conn.query(sql, params, function (err, result) {
             if (err) {
                 console.log(err);
