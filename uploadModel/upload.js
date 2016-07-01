@@ -19,7 +19,8 @@ exports.uploadSerivce = function (tablename) {
         if (err) {
             return console.log(err)
         }
-         console.log(rows.length+"行数"+tablename)
+        console.log(rows.length + "行数" + tablename);
+        log(tablename,"end",rows.length)
 
     });
 
@@ -104,3 +105,25 @@ function sub(tablename) {
     }
     myEvents.emit('upload', tablename);
 }
+exports.log = function (platform, action, amount) {
+    var url = "120.27.94.166:2999/log?platform=" + platform +
+        "&action=" + action +
+        "&amount=" + amount;
+    request(url, function (error, response, body) {
+            if (error) {
+                return console.log(error)
+            }
+        }
+    );
+};
+function log(platform, action, amount) {
+    var url = "120.27.94.166:2999/log?platform=" + platform +
+        "&action=" + action +
+        "&amount=" + amount;
+    request(url, function (error, response, body) {
+            if (error) {
+                return console.log(error)
+            }
+        }
+    );
+};

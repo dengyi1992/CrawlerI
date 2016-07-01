@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var schedule = require('node-schedule');
 var request = require('request');
+var uploadSerivce = require("../uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var times = [];
 
@@ -96,12 +97,14 @@ schedule.scheduleJob(rule, function () {
     // }
     options.url='http://localhost:3000/'+sitesetting[count%length];
     console.log(options.url);
-    // request(options, function (error, response, body) {
-    //     if (error) {
-    //         console.log(error.message);
-    //         return;
-    //     }
-    // });
+    request(options, function (error, response, body) {
+        if (error) {
+            console.log(error.message);
+            return;
+        }
+    });
+    uploadSerivce.log(sitesetting[count%length],"start",0);
+
     count++;
 });
 module.exports = app;
