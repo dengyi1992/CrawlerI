@@ -33,7 +33,9 @@ var config = {
         uploadurl: 'http://120.27.94.166:2999/'
     },
 
-    sitesetting: ['huya', 'douyu', 'bilibli', 'panda', 'yy'],
+    //sitesetting: ['huya', 'douyu', 'bilibli', 'panda', 'yy'],
+    sitesetting: ['huya',  'panda', 'yy'],
+
 
 
     db: {
