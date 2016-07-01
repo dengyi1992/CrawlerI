@@ -88,16 +88,17 @@ myEvents.on('initData', function (pn) {
         }
         try {
             var data = JSON.parse(String(body));
+            if (data.data.list.length == 0) {
+                isMainFinish = true;
+                page=1;
+                return;
+            }
+            acquireData(data);
 
         }catch (e){
             console.log(e.message);
         }
-        if (data.data.list.length == 0) {
-            isMainFinish = true;
-            page=1;
-            return;
-        }
-        acquireData(data);
+
     })
 
 });
