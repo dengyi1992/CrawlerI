@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var schedule = require('node-schedule');
 var request = require('request');
-var uploadSerivce = require("../uploadModel/upload.js");
+var uploadSerivce = require("./uploadModel/upload.js");
 var rule = new schedule.RecurrenceRule();
 var times = [];
 
