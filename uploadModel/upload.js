@@ -106,7 +106,7 @@ function sub(tablename) {
     myEvents.emit('upload', tablename);
 }
 exports.log = function (platform, action, amount) {
-    var url = "120.27.94.166:2999/log?platform=" + platform +
+    var url = "http://120.27.94.166:2999/log?platform=" + platform +
         "&action=" + action +
         "&amount=" + amount;
     request(url, function (error, response, body) {
@@ -117,7 +117,7 @@ exports.log = function (platform, action, amount) {
     );
 };
 function log(platform, action, amount) {
-    var url = "120.27.94.166:2999/log?platform=" + platform +
+    var url = "http://120.27.94.166:2999/log?platform=" + platform +
         "&action=" + action +
         "&amount=" + amount;
     request(url, function (error, response, body) {
