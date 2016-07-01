@@ -61,42 +61,47 @@ app.use(function (err, req, res, next) {
 });
 
 rule.minute = times;
-for (var i = 0; i < 60; i = i + 30) {
+for (var i = 0; i < 60; i = i + 20) {
     times.push(i);
 }
 var count = 0;
 var options = {
     method: 'GET',
     encoding: null,
-    url: "localhost:3000"
+    url: null
 };
+var config=require("./config");
+var sitesetting = config.sitesetting;
+var length = sitesetting.length;
 schedule.scheduleJob(rule, function () {
 
-    switch (count % 5) {
-        case 0:
-            options.url = 'http://localhost:3000/huya';
-            break;
-        case 1:
-            options.url = 'http://localhost:3000/douyu';
-            break;
-        case 2:
-            options.url = 'http://localhost:3000/bilibli';
-            break;
-        case 3:
-            options.url = 'http://localhost:3000/panda';
-            break;
-        case 4:
-            options.url = 'http://localhost:3000/yy';
-            break;
-        default:
-            break;
-    }
-    request(options, function (error, response, body) {
-        if (error) {
-            console.log(error.message);
-            return;
-        }
-    });
+    // switch (count % length) {
+    //     case 0:
+    //         options.url = 'http://localhost:3000/huya';
+    //         break;
+    //     case 1:
+    //         options.url = 'http://localhost:3000/douyu';
+    //         break;
+    //     case 2:
+    //         options.url = 'http://localhost:3000/bilibli';
+    //         break;
+    //     case 3:
+    //         options.url = 'http://localhost:3000/panda';
+    //         break;
+    //     case 4:
+    //         options.url = 'http://localhost:3000/yy';
+    //         break;
+    //     default:
+    //         break;
+    // }
+    options.url='http://localhost:3000/'+sitesetting[count%length];
+    console.log(options.url);
+    // request(options, function (error, response, body) {
+    //     if (error) {
+    //         console.log(error.message);
+    //         return;
+    //     }
+    // });
     count++;
 });
 module.exports = app;
