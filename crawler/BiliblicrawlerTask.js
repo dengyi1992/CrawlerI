@@ -33,7 +33,7 @@ exports.getMainData = function () {
         // console.log(page + '页码');
         page = page + 1;
     });
-    if (isFinish) {
+    if (isFinish||page>40) {
         isFinish = false;
         page = 1;
         return true;

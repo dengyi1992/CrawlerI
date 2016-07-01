@@ -11,7 +11,7 @@ var myEvents = new EventEmitter();
 var isFinish = false;
 var isMainFinish = false;
 var start = 1;
-var page = 0;
+var page = 1;
 /**
  * @return {boolean}
  */
@@ -71,7 +71,6 @@ exports.getMainData = function () {
     page++;
     if (isMainFinish) {
         isMainFinish = false;
-        page=0;
         return true;
     } else {
         return false;
@@ -87,9 +86,15 @@ myEvents.on('initData', function (pn) {
         if (err) {
             return console.log(err);
         }
-        var data = JSON.parse(body);
+        try {
+            var data = JSON.parse(String(body));
+
+        }catch (e){
+            console.log(e.message);
+        }
         if (data.data.list.length == 0) {
             isMainFinish = true;
+            page=1;
             return;
         }
         acquireData(data);
