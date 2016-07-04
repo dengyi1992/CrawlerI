@@ -20,7 +20,7 @@ exports.uploadSerivce = function (tablename) {
             return console.log(err)
         }
         console.log(rows.length + "行数" + tablename);
-        log(tablename,"end",rows.length)
+        log(tablename,config.host+"end",rows.length)
 
     });
 
