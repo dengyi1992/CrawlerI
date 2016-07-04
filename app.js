@@ -62,9 +62,10 @@ app.use(function (err, req, res, next) {
 });
 
 rule.minute = times;
-for (var i = 0; i < 60; i = i + 20) {
+for (var i = 0; i < 60; i = i + 3) {
     times.push(i);
 }
+var abc=0;
 var count = 0;
 var options = {
     method: 'GET',
@@ -95,16 +96,19 @@ schedule.scheduleJob(rule, function () {
     //     default:
     //         break;
     // }
-    options.url='http://localhost:3000/'+sitesetting[count%length];
-    console.log(options.url);
-    request(options, function (error, response, body) {
-        if (error) {
-            console.log(error.message);
-            return;
-        }
-    });
-    uploadSerivce.log(sitesetting[count%length],"start",0);
+    if (abc++%8==0){
+        options.url='http://localhost:3000/'+sitesetting[count%length];
+        console.log(options.url);
+        request(options, function (error, response, body) {
+            if (error) {
+                console.log(error.message);
+                return;
+            }
+        });
+        uploadSerivce.log(sitesetting[count%length],config.host+"start",0);
 
-    count++;
+        count++;
+    }
+    
 });
 module.exports = app;
