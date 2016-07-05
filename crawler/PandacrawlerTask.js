@@ -100,12 +100,16 @@ myEvents.on('initData', function (pn) {
         if (err) {
             return console.log(err);
         }
-        var data = JSON.parse(body);
-        if (data.data.items.length == 0) {
-            isMainFinish = true;
-            return;
+        try {
+            var data = JSON.parse(body);
+            if (data.data.items.length == 0) {
+                isMainFinish = true;
+                return;
+            }
+            acquireData(data)
+        }catch (e){
+            console.log(e.message)
         }
-        acquireData(data)
     })
 
 });
