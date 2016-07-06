@@ -13,7 +13,7 @@ var mcpage = 1;
 var livepage = 1;
 var showpage = 1;
 var dancepage = 1;
-var gamepage=1;
+var gamepage = 1;
 var yule = true;
 exports.getYULE = function () {
 
@@ -201,7 +201,7 @@ exports.getDANCE = function () {
         showpage = 1;
         yulepage = 1;
         dancepage = 1;
-        gamepage =1;
+        gamepage = 1;
         return true;
     } else {
         return false;
@@ -221,6 +221,7 @@ function acquireData(data) {
         });
         conn.query(sql, [values], function (err, result) {
             if (err) {
+                conn.end();
                 console.log(err);
                 return;
             }
@@ -239,6 +240,7 @@ exports.getFans = function () {
     var Sql = 'SELECT * FROM yy limit ' + limit_range + ';';
     conn.query(Sql, function (err, rows, field) {
         if (err) {
+            conn.end();
             return console.log(err + '------------sql err--------------')
         }
         if (rows.length == 0) {
@@ -283,6 +285,7 @@ myEvents.on('updateTable', function (numOfFun, room_id) {
     var updateParams = [numOfFun, room_id];
     conn.query(updateSql, updateParams, function (err, rows, field) {
         if (err) {
+            conn.end();
             console.log('------------sql update err--------------' + err)
         }
     })

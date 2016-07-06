@@ -98,7 +98,7 @@ schedule.scheduleJob(rule, function () {
     // }
     if (abc++%8==0){
         options.url='http://localhost:3000/'+sitesetting[count%length];
-        console.log(options.url);
+        console.log(options.url);   
         request(options, function (error, response, body) {
             if (error) {
                 console.log(error.message);

@@ -25,6 +25,7 @@ exports.updateTag = function () {
         var userAddSql = 'SELECT * FROM panda limit ' + limit_range + ';';
         conn.query(userAddSql, function (err, rows, fields) {
             if (err) {
+                conn.end();
                 console.log(err.message);
                 return;
             }
@@ -71,6 +72,7 @@ myEvents.on('updateTags', function (fans, mTags, classification, room_id) {
     var updateParams = ['', fans, classification, room_id];
     conn.query(updateSql, updateParams, function (err, result) {
         if (err) {
+            conn.end();
             return console.log(err);
         }
 
@@ -125,6 +127,7 @@ function acquireData(data) {
     });
     conn.query(sql, [values], function (err, result) {
         if (err) {
+            conn.end();
             console.log(err);
             return;
         }

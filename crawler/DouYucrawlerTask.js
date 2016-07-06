@@ -26,6 +26,7 @@ exports.UpTags = function () {
         var userAddSql = 'SELECT * FROM dy limit ' + limit_range + ';';
         conn.query(userAddSql, function (err, rows, fields) {
             if (err) {
+                conn.end();
                 return console.log(err.message)
             }
             ;
@@ -76,6 +77,7 @@ myEvents.on('updateTags', function (mTags, room_id) {
     var updateParams = [mTags, room_id];
     conn.query(updateSql, updateParams, function (err, result) {
         if (err) {
+            conn.end();
             return console.log(err);
         }
     })
@@ -131,6 +133,7 @@ function acquireData(data) {
     });
     conn.query(sql, [values], function (err, result) {
         if (err) {
+            conn.end();
             console.log(err);
             return;
         }

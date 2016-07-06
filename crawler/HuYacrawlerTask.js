@@ -24,7 +24,10 @@ exports.UpdateTags = function () {
         var limit_range = (start - 1) * 10 + ',' + 10;
         var userAddSql = 'SELECT * FROM huya limit ' + limit_range + ';';
         conn.query(userAddSql, function (err, rows, fields) {   //rows是啥？
-            if (err) throw err;
+            if (err) {
+                conn.end();
+                return console.log(err+"--sql--");
+            };
             if (rows.length == 0) {
                 isFinish = true;
                 return;
@@ -61,6 +64,7 @@ myEvents.on('updateFans', function (fans, room_id) {
     var updateParams = [fans, room_id];
     conn.query(updateSql, updateParams, function (err, result) {
         if (err) {
+            conn.end();
             return console.log(err);
         }
     })
@@ -114,7 +118,8 @@ function acquireData(data) {
     });
     conn.query(sql, [values], function (err, result) {
         if (err) {
-            return console.log(err);
+            conn.end();
+            return console.log(err+"--sql--");
         }
     });
 }

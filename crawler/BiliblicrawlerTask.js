@@ -60,6 +60,7 @@ function acquireData(data) {
         });
         conn.query(sql, [values], function (err, result) {
             if (err) {
+                conn.end();
                 console.log(err);
                 return;
             }
@@ -77,6 +78,7 @@ exports.updateTagsAndfans = function () {
     var userAddSql = 'SELECT * FROM bilibli limit ' + limit_range + ';';
     conn.query(userAddSql, function (err, rows, fields) {
         if (err) {
+            conn.end();
             console.log(err);
         }
         if (rows.length > 0) {
@@ -145,6 +147,7 @@ myEvents.on('updateInfo', function (fanscount, type, alltags, room_id) {
     var parms = [fanscount, type, alltags, room_id];
     conn.query(sql, parms, function (err, result) {
         if (err) {
+            conn.end();
             console.log(err + "---sql----");
         }
     })
