@@ -35,24 +35,24 @@ var config = {
 
     sitesetting: ['huya', 'douyu', 'bilibli', 'panda', 'yy'],
     // sitesetting: ['huya',  'panda', 'yy'],
-    host:"from 120",
+    host:"from office",
 
 
 
-    // db: {
-    //    host: 'localhost',
-    //    user: 'root',
-    //    password: 'root',
-    //    database: 'douyu',
-    //    port: 3306
-    // }
-     db:{
-         host: 'localhost',
-         user: 'root',
-         password: 'xidian@513',
-         database: 'douyu',
-         port: 3306
-     }
+    db: {
+       host: 'localhost',
+       user: 'root',
+       password: 'root',
+       database: 'douyu',
+       port: 3306
+    }
+     // db:{
+     //     host: 'localhost',
+     //     user: 'root',
+     //     password: 'xidian@513',
+     //     database: 'douyu',
+     //     port: 3306
+     // }
 };
 
 
